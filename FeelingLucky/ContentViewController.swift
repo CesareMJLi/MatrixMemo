@@ -27,26 +27,37 @@ class ContentViewController: UIViewController {
     }
     
     // MARK: Actions
-    @IBAction func setTextBoxFiled(_ sender: UIButton) {
+    @IBAction func setTextBox(_ sender: UIButton) {
         textView.text = "What the fuck dudeeeeee"
     }
+    
     
     @IBAction func setTextBoxColor(_ sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex{
         case 0:
             textView.textColor = UIColor.black
+            textView.backgroundColor = UIColor.white
+            backgroundView.backgroundColor = UIColor.white
         case 1:
-            textView.textColor = UIColor.blue
-            backgroundView.backgroundColor = UIColor.brown
-            textView.backgroundColor = UIColor.brown
+            textView.textColor = UIColor.green
+            textView.backgroundColor = UIColor.black
+            backgroundView.backgroundColor = UIColor.black
         case 2:
-            textView.textColor = UIColor.orange
+            textView.textColor = UIColor.black
+            textView.backgroundColor = UIColor.yellow
+            backgroundView.backgroundColor = UIColor.yellow
         case 3:
-            textView.textColor = UIColor.yellow
+            textView.textColor = UIColor.black
+            textView.backgroundColor = UIColor.cyan
+            backgroundView.backgroundColor = UIColor.cyan
         case 4:
             textView.textColor = UIColor.white
+            textView.backgroundColor = UIColor.black
+            backgroundView.backgroundColor = UIColor.black
         case 5:
             textView.textColor = UIColor.lightGray
+            textView.backgroundColor = UIColor.white
+            backgroundView.backgroundColor = UIColor.white
         default:
             NSLog("sender: %ld",sender.selectedSegmentIndex)
         }

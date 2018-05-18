@@ -118,6 +118,7 @@
                                 <state key="normal" title="Button"/>
                                 <connections>
                                     <action selector="SetLabel:" destination="uMq-9x-Rs3" eventType="touchUpInside" id="D7T-t2-e2S"/>
+                                    <action selector="setTextBox:" destination="uMq-9x-Rs3" eventType="touchUpInside" id="2dE-oT-pvD"/>
                                     <action selector="setTextBoxFiled:" destination="uMq-9x-Rs3" eventType="touchUpInside" id="9CK-oL-V66"/>
                                     <action selector="setTextView:" destination="uMq-9x-Rs3" eventType="touchUpInside" id="vGK-pR-MRb"/>
                                 </connections>
