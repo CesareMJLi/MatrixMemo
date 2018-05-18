@@ -10,10 +10,14 @@ import UIKit
 
 class ContentViewController: UIViewController {
 
-    @IBOutlet weak var wtfLabel: UILabel!
+    // MARK: Properties
+    @IBOutlet weak var textView: UITextView!
+    @IBOutlet var backgroundView: UIView!
+    @IBOutlet weak var segmentThemeCtrl: UISegmentedControl!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.hideKeyboardWhenTappedAround()
         // Do any additional setup after loading the view.
     }
 
@@ -22,18 +26,33 @@ class ContentViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func SetLabel(_ sender: UIButton) {
-        wtfLabel.text = "Suck my dick"
+    // MARK: Actions
+    @IBAction func setTextBoxFiled(_ sender: UIButton) {
+        textView.text = "What the fuck dudeeeeee"
     }
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    @IBAction func setTextBoxColor(_ sender: UISegmentedControl) {
+        switch sender.selectedSegmentIndex{
+        case 0:
+            textView.textColor = UIColor.black
+        case 1:
+            textView.textColor = UIColor.blue
+            backgroundView.backgroundColor = UIColor.brown
+            textView.backgroundColor = UIColor.brown
+        case 2:
+            textView.textColor = UIColor.orange
+        case 3:
+            textView.textColor = UIColor.yellow
+        case 4:
+            textView.textColor = UIColor.white
+        case 5:
+            textView.textColor = UIColor.lightGray
+        default:
+            NSLog("sender: %ld",sender.selectedSegmentIndex)
+        }
     }
-    */
+    
 
 }
+
+
