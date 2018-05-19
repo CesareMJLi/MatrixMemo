@@ -33,31 +33,46 @@ class ContentViewController: UIViewController {
     
     
     @IBAction func setTextBoxColor(_ sender: UISegmentedControl) {
+        var counter: Int = 1
         switch sender.selectedSegmentIndex{
         case 0:
+            // Normal
+            segmentThemeCtrl.tintColor = UIColor.blue
             textView.textColor = UIColor.black
             textView.backgroundColor = UIColor.white
             backgroundView.backgroundColor = UIColor.white
         case 1:
+            // Matrix
+            segmentThemeCtrl.tintColor = UIColor.green
             textView.textColor = UIColor.green
             textView.backgroundColor = UIColor.black
             backgroundView.backgroundColor = UIColor.black
         case 2:
+            // Man
+            segmentThemeCtrl.tintColor = UIColor.black
             textView.textColor = UIColor.black
-            textView.backgroundColor = UIColor.yellow
-            backgroundView.backgroundColor = UIColor.yellow
+            textView.backgroundColor = UIColor.init(red: 254.0/255, green: 244.0/255, blue: 156.0/255, alpha: 1)
+            backgroundView.backgroundColor = UIColor.init(red: 254.0/255, green: 244.0/255, blue: 156.0/255, alpha: 1)
         case 3:
+            // May
+            segmentThemeCtrl.tintColor = UIColor.black
             textView.textColor = UIColor.black
             textView.backgroundColor = UIColor.cyan
             backgroundView.backgroundColor = UIColor.cyan
         case 4:
+            // Anti
+            segmentThemeCtrl.tintColor = UIColor.white
             textView.textColor = UIColor.white
             textView.backgroundColor = UIColor.black
             backgroundView.backgroundColor = UIColor.black
         case 5:
-            textView.textColor = UIColor.lightGray
-            textView.backgroundColor = UIColor.white
-            backgroundView.backgroundColor = UIColor.white
+            // Light
+            counter+=1
+            segmentThemeCtrl.tintColor = UIColor.black
+            textView.textColor = UIColor.black
+            textView.backgroundColor = UIColor.lightGray
+            backgroundView.backgroundColor = UIColor.lightGray
+            NSLog("sender: %i",counter)
         default:
             NSLog("sender: %ld",sender.selectedSegmentIndex)
         }
