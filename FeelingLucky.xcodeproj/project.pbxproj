@@ -13,6 +13,7 @@
 		D32A3B3420A87BC30077D311 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D32A3B3220A87BC30077D311 /* LaunchScreen.storyboard */; };
 		D32A3B3F20A87BC30077D311 /* FeelingLuckyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32A3B3E20A87BC30077D311 /* FeelingLuckyTests.swift */; };
 		D35E076A20AD6544005B10E1 /* ContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35E076920AD6544005B10E1 /* ContentViewController.swift */; };
+		D3655F9920B0189D000EEF9A /* memo.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3655F9820B0189D000EEF9A /* memo.swift */; };
 		D3FE851620ACE9DB0043EE8C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D3FE851520ACE9DB0043EE8C /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
@@ -37,6 +38,7 @@
 		D32A3B3E20A87BC30077D311 /* FeelingLuckyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeelingLuckyTests.swift; sourceTree = "<group>"; };
 		D32A3B4020A87BC30077D311 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D35E076920AD6544005B10E1 /* ContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewController.swift; sourceTree = "<group>"; };
+		D3655F9820B0189D000EEF9A /* memo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = memo.swift; sourceTree = "<group>"; };
 		D3FE851520ACE9DB0043EE8C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -83,6 +85,7 @@
 				D32A3B2B20A87BC10077D311 /* ViewController.swift */,
 				D35E076920AD6544005B10E1 /* ContentViewController.swift */,
 				D32A3B2D20A87BC10077D311 /* Main.storyboard */,
+				D3655F9820B0189D000EEF9A /* memo.swift */,
 				D32A3B3220A87BC30077D311 /* LaunchScreen.storyboard */,
 				D3FE851520ACE9DB0043EE8C /* Assets.xcassets */,
 				D32A3B3520A87BC30077D311 /* Info.plist */,
@@ -203,6 +206,7 @@
 				D32A3B2C20A87BC10077D311 /* ViewController.swift in Sources */,
 				D35E076A20AD6544005B10E1 /* ContentViewController.swift in Sources */,
 				D32A3B2A20A87BC10077D311 /* AppDelegate.swift in Sources */,
+				D3655F9920B0189D000EEF9A /* memo.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

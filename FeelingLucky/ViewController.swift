@@ -30,20 +30,8 @@ class ViewController: UIViewController {
         if password.text == "1207"{
             self.performSegue(withIdentifier:"toContentPage", sender:self)
         } else {
-            sendNudes.text = "Send Nudes XD"
+            sendNudes.text = "INCORRECT USER"
         }
     }
 }
 
-// Put this piece of code anywhere you like
-extension UIViewController {
-    func hideKeyboardWhenTappedAround() {
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
-        tap.cancelsTouchesInView = false
-        view.addGestureRecognizer(tap)
-    }
-    
-    @objc func dismissKeyboard() {
-        view.endEditing(true)
-    }
-}

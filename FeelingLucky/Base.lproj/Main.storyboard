@@ -88,7 +88,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" keyboardDismissMode="interactive" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="rrO-qJ-wC5">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" directionalLockEnabled="YES" pagingEnabled="YES" keyboardDismissMode="interactive" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="rrO-qJ-wC5">
                                 <rect key="frame" x="16" y="55" width="288" height="493"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -106,51 +106,25 @@
                                     <segment title="3"/>
                                     <segment title="4"/>
                                     <segment title="5"/>
-                                    <segment title="6"/>
+                                    <segment title="save"/>
                                 </segments>
                                 <connections>
                                     <action selector="setTextBoxColor:" destination="uMq-9x-Rs3" eventType="valueChanged" id="7wt-2o-zvm"/>
                                 </connections>
                             </segmentedControl>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nfY-66-dNM">
-                                <rect key="frame" x="137" y="440" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <connections>
-                                    <action selector="SetLabel:" destination="uMq-9x-Rs3" eventType="touchUpInside" id="D7T-t2-e2S"/>
-                                    <action selector="setTextBox:" destination="uMq-9x-Rs3" eventType="touchUpInside" id="2dE-oT-pvD"/>
-                                    <action selector="setTextBoxFiled:" destination="uMq-9x-Rs3" eventType="touchUpInside" id="9CK-oL-V66"/>
-                                    <action selector="setTextView:" destination="uMq-9x-Rs3" eventType="touchUpInside" id="vGK-pR-MRb"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <gestureRecognizers/>
                         <viewLayoutGuide key="safeArea" id="DTu-GH-w0l"/>
-                        <connections>
-                            <outletCollection property="gestureRecognizers" destination="VFR-ay-hzh" appends="YES" id="34f-gU-pYV"/>
-                        </connections>
                     </view>
                     <connections>
                         <outlet property="backgroundView" destination="fha-yo-uYb" id="CP7-eg-RxX"/>
                         <outlet property="segmentThemeCtrl" destination="nEO-rr-sxX" id="Nsx-KA-4TK"/>
                         <outlet property="textView" destination="rrO-qJ-wC5" id="yvl-La-OrO"/>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="backToMainView" id="Lre-EF-1Sm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="R7b-Lt-khK" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <swipeGestureRecognizer direction="up" id="VFR-ay-hzh">
-                    <attributedString key="userComments">
-                        <fragment content="WFAS">
-                            <attributes>
-                                <font key="NSFont" metaFont="smallSystem"/>
-                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                            </attributes>
-                        </fragment>
-                    </attributedString>
-                    <connections>
-                        <segue destination="BYZ-38-t0r" kind="show" id="sYD-IM-uWv"/>
-                    </connections>
-                </swipeGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1436.25" y="130.98591549295776"/>
         </scene>
