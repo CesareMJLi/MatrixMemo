@@ -9,9 +9,10 @@
 import UIKit
 import os.log
 
-class ContentViewController: UIViewController {
+class ContentViewController: UIViewController, UITextFieldDelegate {
     
     var m: memo?
+    var kbHeight: CGFloat!
 
     // MARK: Properties
     @IBOutlet weak var textView: UITextView!
@@ -19,16 +20,55 @@ class ContentViewController: UIViewController {
     @IBOutlet weak var segmentThemeCtrl: UISegmentedControl!
     
     override func viewDidLoad() {
+        textView.delegate = self as? UITextViewDelegate
         loadMemo()
         textView.text = m?.content
         super.viewDidLoad()
-        self.hideKeyboardWhenTappedAround()
+//        self.hideKeyboardWhenTappedAround()
         // Do any additional setup after loading the view.
     }
-
+    
+    override func viewWillAppear(_ animated:Bool) {
+        super.viewWillAppear(animated)
+        NotificationCenter.default.addObserver(self, selector: Selector("keyboardWillShow:"), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: Selector("keyboardWillHide:"), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    func keyboardWillShow(notification: NSNotification) {
+        if let userInfo = notification.userInfo {
+            if let keyboardSize =  (userInfo[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+                kbHeight = keyboardSize.height
+                self.animateTextField(up: true)
+            }
+        }
+    }
+    
+    func keyboardWillHide(notification: NSNotification) {
+        self.animateTextField(up: false)
+    }
+    
+    func animateTextField(up: Bool) {
+        var movement = (up ? -kbHeight : kbHeight)
+        UIView.animate(withDuration: 0.3, animations: {
+            self.view.frame = self.view.frame.offsetBy(dx: 0, dy: movement!)
+//            self.view.frame = CGRectOffset(self.view.frame, 0, movement!)
+//            self.view.frame = CGRectOffset(self.view.frame, 0, movement!)
+        })
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
     
     // MARK: Actions
@@ -105,15 +145,15 @@ class ContentViewController: UIViewController {
     }
 }
 
-extension UIViewController {
-    func hideKeyboardWhenTappedAround() {
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
-        tap.cancelsTouchesInView = false
-        view.addGestureRecognizer(tap)
-    }
-    
-    @objc func dismissKeyboard() {
-        view.endEditing(true)
-    }
-}
+//extension UIViewController {
+//    func hideKeyboardWhenTappedAround() {
+//        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
+//        tap.cancelsTouchesInView = false
+//        view.addGestureRecognizer(tap)
+//    }
+//
+//    @objc func dismissKeyboard() {
+//        view.endEditing(true)
+//    }
+//}
 
