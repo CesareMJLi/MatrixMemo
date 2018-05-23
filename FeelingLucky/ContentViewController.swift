@@ -9,66 +9,71 @@
 import UIKit
 import os.log
 
-class ContentViewController: UIViewController, UITextFieldDelegate {
+class ContentViewController: UIViewController, UITextViewDelegate {
     
     var m: memo?
-//    var kbHeight: CGFloat!
 
     // MARK: Properties
     @IBOutlet weak var textView: UITextView!
     @IBOutlet var backgroundView: UIView!
     @IBOutlet weak var segmentThemeCtrl: UISegmentedControl!
     
+    var kbHeight: CGFloat!
+    
     override func viewDidLoad() {
-        textView.delegate = self as? UITextViewDelegate
+        textView.delegate = self
         loadMemo()
         textView.text = m?.content
         super.viewDidLoad()
-//        self.hideKeyboardWhenTappedAround()
         // Do any additional setup after loading the view.
     }
     
-//    override func viewWillAppear(_ animated:Bool) {
-//        super.viewWillAppear(animated)
-//        NotificationCenter.default.addObserver(self, selector: Selector("keyboardWillShow:"), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-//        NotificationCenter.default.addObserver(self, selector: Selector("keyboardWillHide:"), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
-//    }
-//
-//    override func viewWillDisappear(_ animated: Bool) {
-//        super.viewWillDisappear(animated)
-//        NotificationCenter.default.removeObserver(self)
-//    }
-//    
-//    func keyboardWillShow(notification: NSNotification) {
-//        if let userInfo = notification.userInfo {
-//            if let keyboardSize =  (userInfo[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-//                kbHeight = keyboardSize.height
-//                self.animateTextField(up: true)
-//            }
-//        }
-//    }
-//
-//    func keyboardWillHide(notification: NSNotification) {
-//        self.animateTextField(up: false)
-//    }
-//
-//    func animateTextField(up: Bool) {
-//        var movement = (up ? -kbHeight : kbHeight)
-//        UIView.animate(withDuration: 0.3, animations: {
-//            self.view.frame = self.view.frame.offsetBy(dx: 0, dy: movement!)
-////            self.view.frame = CGRectOffset(self.view.frame, 0, movement!)
-////            self.view.frame = CGRectOffset(self.view.frame, 0, movement!)
-//        })
-//    }
+    //----------Start from keyboard moving----------
+    func animateTextView(up:Bool){
+        if up{
+            os_log("MOVED UP!!!!!!!!!!!!!!")
+        }else{
+            os_log("MOVED DOWN!!!!!!!!!!!!!!")
+        }
+        var movement = (up ? -kbHeight : (kbHeight/2))
+        UIView.animate(withDuration: 0.3, animations: {self.view.frame = self.view.frame.offsetBy(dx: 0, dy: movement)})
+    }
+    
+    override func viewWillAppear(_ animated:Bool) {
+        super.viewWillAppear(animated)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow), name: .UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide), name: .UIKeyboardWillHide, object: nil)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    @objc func keyboardWillShow(notification: Notification) {
+        if let userInfo = notification.userInfo {
+            if let keyboardSize = (userInfo[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+                kbHeight = keyboardSize.height
+                self.animateTextView(up: true)
+            }
+        }
+    }
+    
+    @objc func keyboardWillHide(notification: Notification) {
+        self.animateTextView(up: false)
+    }
+    
+    func textViewShouldReturn(textView: UITextView) -> Bool {
+        textView.resignFirstResponder()
+        return true
+    }
+    
+    
+    //----------End of keyboard moving----------
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-    
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
     }
     
     // MARK: Actions
@@ -145,15 +150,4 @@ class ContentViewController: UIViewController, UITextFieldDelegate {
     }
 }
 
-//extension UIViewController {
-//    func hideKeyboardWhenTappedAround() {
-//        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
-//        tap.cancelsTouchesInView = false
-//        view.addGestureRecognizer(tap)
-//    }
-//
-//    @objc func dismissKeyboard() {
-//        view.endEditing(true)
-//    }
-//}
 
