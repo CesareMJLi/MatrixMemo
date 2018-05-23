@@ -12,6 +12,8 @@ import os.log
 class ContentViewController: UIViewController, UITextViewDelegate {
     
     var m: memo?
+    var lastTimeTrigger: Float?
+    // this last time trigger is a sub-optimal solution for the problem of the app always trigger two times of moved down
 
     // MARK: Properties
     @IBOutlet weak var textView: UITextView!
@@ -21,6 +23,7 @@ class ContentViewController: UIViewController, UITextViewDelegate {
     var kbHeight: CGFloat!
     
     override func viewDidLoad() {
+        self.lastTimeTrigger = 0
         textView.delegate = self
         loadMemo()
         textView.text = m?.content
@@ -35,8 +38,8 @@ class ContentViewController: UIViewController, UITextViewDelegate {
         }else{
             os_log("MOVED DOWN!!!!!!!!!!!!!!")
         }
-        var movement = (up ? -kbHeight : (kbHeight/2))
-        UIView.animate(withDuration: 0.3, animations: {self.view.frame = self.view.frame.offsetBy(dx: 0, dy: movement)})
+        var movement = (up ? -kbHeight : kbHeight)
+        UIView.animate(withDuration: 0.3, animations: {self.view.frame = self.view.frame.offsetBy(dx: 0, dy: movement!)})
     }
     
     override func viewWillAppear(_ animated:Bool) {
@@ -60,7 +63,12 @@ class ContentViewController: UIViewController, UITextViewDelegate {
     }
     
     @objc func keyboardWillHide(notification: Notification) {
-        self.animateTextView(up: false)
+        var currentTime = Float(CACurrentMediaTime())
+//        os_log("%.20f",currentTime)
+        if currentTime>(self.lastTimeTrigger!+0.8){
+            self.animateTextView(up: false)
+            self.lastTimeTrigger = currentTime
+        }
     }
     
     func textViewShouldReturn(textView: UITextView) -> Bool {
