@@ -36,23 +36,32 @@ class ContentViewController: UIViewController, UITextViewDelegate {
     
     //----------Start from keyboard moving----------
     func animateTextView(up:Bool){
-//        if up{
-//            os_log("MOVED UP!!!!!!!!!!!!!!")
-//            if let selectedRange = textView.selectedTextRange {
-//                os_log("%i", selectedRange)
-////                let cursorPosition = textView.offset(from: textView.beginningOfDocument, to: selectedRange.start)
-//            }
-//        }else{
-//            os_log("MOVED DOWN!!!!!!!!!!!!!!")
+        
+        //--- do not move the keyboard when the cursor is in the upper side of the screen
+//        if let cursorPosition = textView.selectedTextRange?.start {
+//            // cursorPosition is a UITextPosition object describing position in the text (text-wise description)
+//            let caretPositionRectangle: CGRect = textView.caretRect(for: cursorPosition)
+//            os_log("cursor height/width are %f/%f", caretPositionRectangle.height, caretPositionRectangle.width)
+//            // now use either the whole rectangle, or its origin (caretPositionRectangle.origin)
 //        }
+//
+//        if let selectedRange = textView.selectedTextRange {
+//            var beg = textView.beginningOfDocument
+//            var end = textView.selectedTextRange?.start
+////            let cursorPosition = textView.offset(from: textView.beginningOfDocument, to: selectedRange.start)
+//            os_log("beg: %o end:%o", beg,end as! CVarArg)
+//        }
+        
+        //------
+        
         
         // solve the problem that changing input keyboard would trigger animateTextView problem.
         if !(self.keyboardShown!) && up{
-            os_log("%f",self.kbHeight)
+//            os_log("%f",self.kbHeight)
             UIView.animate(withDuration: 0.3, animations: {self.view.frame = self.view.frame.offsetBy(dx: 0, dy: -self.kbHeight)})
             self.keyboardShown=true
         }else if self.keyboardShown! && !up{
-            os_log("%f",self.kbHeight)
+//            os_log("%f",self.kbHeight)
             self.keyboardShown=false
             UIView.animate(withDuration: 0.3, animations: {self.view.frame = self.view.frame.offsetBy(dx: 0, dy: self.kbHeight)})
         }
