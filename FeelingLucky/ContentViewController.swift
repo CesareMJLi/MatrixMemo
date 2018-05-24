@@ -14,6 +14,7 @@ class ContentViewController: UIViewController, UITextViewDelegate {
     var m: memo?
     var lastTimeTrigger: Float?
     // this last time trigger is a sub-optimal solution for the problem of the app always trigger two times of moved down
+    var keyboardShown: Bool?
 
     // MARK: Properties
     @IBOutlet weak var textView: UITextView!
@@ -23,6 +24,8 @@ class ContentViewController: UIViewController, UITextViewDelegate {
     var kbHeight: CGFloat!
     
     override func viewDidLoad() {
+        self.kbHeight = 216.00
+        self.keyboardShown = false
         self.lastTimeTrigger = 0
         textView.delegate = self
         loadMemo()
@@ -33,13 +36,26 @@ class ContentViewController: UIViewController, UITextViewDelegate {
     
     //----------Start from keyboard moving----------
     func animateTextView(up:Bool){
-        if up{
-            os_log("MOVED UP!!!!!!!!!!!!!!")
-        }else{
-            os_log("MOVED DOWN!!!!!!!!!!!!!!")
+//        if up{
+//            os_log("MOVED UP!!!!!!!!!!!!!!")
+//            if let selectedRange = textView.selectedTextRange {
+//                os_log("%i", selectedRange)
+////                let cursorPosition = textView.offset(from: textView.beginningOfDocument, to: selectedRange.start)
+//            }
+//        }else{
+//            os_log("MOVED DOWN!!!!!!!!!!!!!!")
+//        }
+        
+        // solve the problem that changing input keyboard would trigger animateTextView problem.
+        if !(self.keyboardShown!) && up{
+            os_log("%f",self.kbHeight)
+            UIView.animate(withDuration: 0.3, animations: {self.view.frame = self.view.frame.offsetBy(dx: 0, dy: -self.kbHeight)})
+            self.keyboardShown=true
+        }else if self.keyboardShown! && !up{
+            os_log("%f",self.kbHeight)
+            self.keyboardShown=false
+            UIView.animate(withDuration: 0.3, animations: {self.view.frame = self.view.frame.offsetBy(dx: 0, dy: self.kbHeight)})
         }
-        var movement = (up ? -kbHeight : kbHeight)
-        UIView.animate(withDuration: 0.3, animations: {self.view.frame = self.view.frame.offsetBy(dx: 0, dy: movement!)})
     }
     
     override func viewWillAppear(_ animated:Bool) {
@@ -56,7 +72,7 @@ class ContentViewController: UIViewController, UITextViewDelegate {
     @objc func keyboardWillShow(notification: Notification) {
         if let userInfo = notification.userInfo {
             if let keyboardSize = (userInfo[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-                kbHeight = keyboardSize.height
+//                kbHeight = keyboardSize.height
                 self.animateTextView(up: true)
             }
         }
